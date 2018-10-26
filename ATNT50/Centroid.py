@@ -1,36 +1,57 @@
-from datetime import date
+from scipy.spatial import distance
+import pandas as pd
 
 from ATNT50 import ReadData
 
 
 class Centroid:
 
-    def find_classifier(self, data):
-        data_frame = ReadData.load_data(data)
-        data_frame = data_frame.transpose()
-        label_name = list(data_frame._info_axis)
-        label_name_count = {}
-        count = 0
-        for i in label_name:
-            if i not in label_name_count:
-                count = 1
-                label_name_count[i] = 1
-            else:
-                label_name_count[i] = count + 1
-                count = count + 1
-        mean = {}
-        key = 0
-        for i in label_name_count.values():
-            index = [0, 9]
-            mean[list(label_name_count.keys())[key]] = []
-            for j in range(data_frame.shape[0]):
-                values = data_frame.values[index[0], :index[1]]
-                index[0] = index[0] + 1
-                mean[list(label_name_count.keys())[key]].append(values.mean())
+    def __init__(self):
+        self.centroids = []
 
-            key = key + 1
+    def train_data_and_find_mean(self, data):
+        try:
+            data_frame = ReadData.load_data_without_header(data)
+            data_frame_values = data_frame.values
+            mean_of_train_data = {}
+            for train_data_instance in data_frame_values:
+                label = train_data_instance[0]
+                aggregated_data_record = mean_of_train_data.get(label, {'list_sums': [], 'n': 0})
+                if aggregated_data_record['n'] == 0:
+                    aggregated_data_record['list_sums'] = train_data_instance[1:]
+                    aggregated_data_record['n'] += 1
+                else:
+                    recorded_sum = aggregated_data_record['list_sums']
+                    aggregated_data_record['list_sums'] = [sum(x) for x in zip(recorded_sum, train_data_instance)]
+                    aggregated_data_record['n'] += 1
+                mean_of_train_data[label] = aggregated_data_record
+
+                for label, values in mean_of_train_data.items():
+                    self.centroids.append([x / values['n'] for x in values['list_sums']])
+        except Exception as e:
+            print(e)
+
+    def get_calcutated_label(self, test_instance):
+        """Returns the label of the closest centroid
+        """
+
+        euclidean_distances = []
+
+        for each_centroid in self.centroids:
+            euclidean_dist = distance.euclidean(each_centroid[1:], test_instance[1:])
+            euclidean_distances.append((each_centroid[0], euclidean_dist))
+
+        sorted_distances = sorted(euclidean_distances, key=lambda x: x[1])
+
+        return sorted_distances[0][0]
 
 
 if __name__ == '__main__':
     classifier_object = Centroid()
-    classifier_object.find_classifier(data='C:/Users/jenil/OneDrive - University of Texas at Arlington/UTA/sem 3/CSE 5334/Project1/ATNT50/trainDataXY.txt')
+    train_data_file_name = input('Please insert full file path including drive and directory name for train data: ')
+    test_data_file_name = input('Please insert full file path including drive and directory name for test data: ')
+    test_data_set = ReadData.load_data_without_header(test_data_file_name).values
+    classifier_object.train_data_and_find_mean(data=train_data_file_name)
+    for each_test in test_data_set:
+        label = classifier_object.get_calcutated_label(test_instance=each_test)
+        print('Predicted Test Label:', each_test[0], 'Calculated Label:', label)

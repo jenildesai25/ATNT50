@@ -27,4 +27,4 @@ def load_test_data(file_name):
 #     # if reading file using terminal uncomment next line and pass file_path
 #     # file_path = sys.argv[2]
 #     # load_data('trainDataXY.txt')
-#     load_test_data('C:/Users/jenil/OneDrive - University of Texas at Arlington/UTA/sem 3/CSE 5334/Project1/ATNT50/testDataXY.txt')
+#     centroid_load_data('C:/Users/jenil/OneDrive - University of Texas at Arlington/UTA/sem 3/CSE 5334/Project1/ATNT50/trainDataXY.txt')

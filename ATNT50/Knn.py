@@ -1,6 +1,7 @@
 from ATNT50 import ReadData
 from scipy.spatial import distance
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import KFold
 
 
 class Knn:
@@ -49,9 +50,9 @@ class Knn:
                 # j is the train data 1st value. As j increases we are getting immediate next rows as j.
                 for j in train_data.values:
                     # temporary variable to store distance between rows between train data and test data.
-                    temp = distance.euclidean(j, i)
+                    temp = distance.euclidean(j[1:], i)
                     # container[test_data.index[count]].append((temp, train_data.index[index])) append distance, and train data index of that distance
-                    container[test_data.index[count]].append((temp, train_data.index[index]))
+                    container[test_data.index[count]].append((temp, j[0]))
                     # index value increases as per row changes for train data.
                     index += 1
                 # count increase as train data row finishes and we need another row from test data.
@@ -133,8 +134,14 @@ if __name__ == '__main__':
     k = int(input('Please enter the values of k: '))
     train_data_file_name = input('Please insert full file path including drive and directory name for train data: ')
     test_data_file_name = input('Please insert full file path including drive and directory name for test data: ')
+    # k_fold = KFold(n_splits=k)
     knn_object = Knn(k)
     train_data_sample, test_data_sample = knn_object.load_train_test_data(train_data_file_name, test_data_file_name)
+    # for train, test in k_fold.split(train_data_sample):
+    #     print("Train data:{}\n Test data:{}".format(train, test))
+    #     X_train, X_test = train_data_sample[train], train_data_sample[test]
+    #     y_train, y_test = train_data_sample[train], train_data_sample[test]
+    # print('k split is:', k_fold.get_n_splits(train_data_sample))
     data_with_euclidean_distance = knn_object.calculate_distance(train_data_sample, test_data_sample)
     nearest_neighbour = knn_object.sort_data_frame(data_with_euclidean_distance)
     occurrence_label = knn_object.count_matching_label(nearest_neighbour)

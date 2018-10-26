@@ -130,8 +130,11 @@ class Knn:
 
 
 if __name__ == '__main__':
-    knn_object = Knn(k=3)
-    train_data_sample, test_data_sample = knn_object.load_train_test_data("C:/Users/jenil/OneDrive - University of Texas at Arlington/UTA/sem 3/CSE 5334/Project1/ATNT50/trainDataXY.txt", "C:/Users/jenil/OneDrive - University of Texas at Arlington/UTA/sem 3/CSE 5334/Project1/ATNT50/testDataXY.txt")
+    k = int(input('Please enter the values of k: '))
+    train_data_file_name = input('Please insert full file path including drive and directory name for train data: ')
+    test_data_file_name = input('Please insert full file path including drive and directory name for test data: ')
+    knn_object = Knn(k)
+    train_data_sample, test_data_sample = knn_object.load_train_test_data(train_data_file_name, test_data_file_name)
     data_with_euclidean_distance = knn_object.calculate_distance(train_data_sample, test_data_sample)
     nearest_neighbour = knn_object.sort_data_frame(data_with_euclidean_distance)
     occurrence_label = knn_object.count_matching_label(nearest_neighbour)

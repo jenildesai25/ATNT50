@@ -18,7 +18,7 @@ class Centroid:
                 label = train_data_instance[0]
                 aggregated_data_record = mean_of_train_data.get(label, {'list_sums': [], 'n': 0})
                 if aggregated_data_record['n'] == 0:
-                    aggregated_data_record['list_sums'] = train_data_instance[1:]
+                    aggregated_data_record['list_sums'] = train_data_instance
                     aggregated_data_record['n'] += 1
                 else:
                     recorded_sum = aggregated_data_record['list_sums']

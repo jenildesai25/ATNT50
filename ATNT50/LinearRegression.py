@@ -13,12 +13,13 @@ class LinearRegression:
     @classmethod
     def load_data(cls, file):
         load_file = pd.read_csv(file, sep=',', header=None)
+        # iloc uses to slicing dataframe. load_file.iloc[0] will give 1st column.
         labels = load_file.iloc[0]
-        # print(labels)
-        N_instance = labels.size
-        # print(N_instance)
+        # N_instance is the label size
+        label_size = labels.size
+        # data does not contain any labels.
         data = load_file.iloc[1:]
-        return N_instance, labels, data
+        return label_size, labels, data
 
     @classmethod
     def indicator_matrix(cls, L_train):

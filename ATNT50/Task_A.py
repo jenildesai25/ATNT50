@@ -22,8 +22,6 @@ if __name__ == '__main__':
         k = 5
         knn_object = Knn(k)
         data_with_euclidean_distance = knn_object.calculate_distance(train_data_with_labels.values, test_data_with_labels.values)
-        # nearest_neighbour = knn_object.sort_data_frame(data_with_euclidean_distance)
-        # occurrence_label = knn_object.count_matching_label(nearest_neighbour)
         accuracy = knn_object.get_accuracy([(k['Test Label'], k['Classification']) for k in data_with_euclidean_distance])
         print('Accuracy of Knn is:', accuracy)
         # Linear Regression

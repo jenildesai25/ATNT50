@@ -19,6 +19,8 @@ if __name__ == '__main__':
         train_data_set_without_labels, train_y, test_data_set_without_labels, test_y, train_data_with_labels, test_data_with_labels = Task_E.splitData2TestTrain(data_frame, 39, 9)
         centroid_data_frame_train = deepcopy(train_data_with_labels)
         centroid_data_frame_test = deepcopy(test_data_with_labels)
+        # make_file_and_save_data_train = Task_E.store(train_data_set_without_labels.T, train_y, 'jenil_train.csv')
+        # make_file_and_save_data_test = Task_E.store(test_data_set_without_labels.T, test_y, 'jenil_test.csv')
         k = 5
         knn_object = Knn(k)
         data_with_euclidean_distance = knn_object.calculate_distance(train_data_with_labels.values, test_data_with_labels.values)

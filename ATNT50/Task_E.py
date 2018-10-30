@@ -23,20 +23,24 @@ def splitData2TestTrain(filename, number_per_class, test_instances):
             test_Y = []  # Test data labels only
             train_X = []  # Training data without labels
             train_Y = []  # Training data labels only
+            train_data_with_labels = []
+            test_data_with_labels = []
             filename = filename.transpose()
             test_instance_count = dict()
-            for col_number in load_file.columns:
-                val = load_file[col_number].values
+            for col_number in filename.columns:
+                val = filename[col_number].values
                 label = val[0]
                 current_count = test_instance_count.get(label, 0)
                 if current_count < test_instances:
                     # Add to test
                     test_Y.append(label)
                     test_X.append(val[1:])
+                    test_data_with_labels.append(val)
                 else:
                     # Add to training
                     train_Y.append(label)
                     train_X.append(val[1:])
+                    train_data_with_labels.append(val)
                 current_count += 1
                 test_instance_count[label] = current_count
             train_X = pd.DataFrame(train_X)
@@ -48,6 +52,8 @@ def splitData2TestTrain(filename, number_per_class, test_instances):
             test_Y = []  # Test data labels only
             train_X = []  # Training data without labels
             train_Y = []  # Training data labels only
+            train_data_with_labels = []
+            test_data_with_labels = []
             filename = filename.transpose()
             test_instance_count = dict()
             for col_number in filename.columns:
@@ -58,15 +64,19 @@ def splitData2TestTrain(filename, number_per_class, test_instances):
                     # Add to test
                     test_Y.append(label)
                     test_X.append(val[1:])
+                    test_data_with_labels.append(val)
                 else:
                     # Add to training
                     train_Y.append(label)
                     train_X.append(val[1:])
+                    train_data_with_labels.append(val)
                 current_count += 1
                 test_instance_count[label] = current_count
             train_X = pd.DataFrame(train_X)
             test_X = pd.DataFrame(test_X)
-            return train_X, train_Y, test_X, test_Y
+            train_data_with_labels = pd.DataFrame(train_data_with_labels)
+            test_data_with_labels = pd.DataFrame(test_data_with_labels)
+            return train_X, train_Y, test_X, test_Y, train_data_with_labels, test_data_with_labels
     except Exception as e:
         print(e)
 

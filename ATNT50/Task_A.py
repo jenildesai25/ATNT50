@@ -2,6 +2,7 @@ from Knn import Knn
 import Task_E
 import LinearRegression
 import Svm
+import Centroid
 
 if __name__ == '__main__':
 
@@ -43,5 +44,13 @@ if __name__ == '__main__':
         svm_object = Svm.SupportVectorMachine()
         svm_object.find_accuracy(train_data_set_without_labels, train_y, test_data_set_without_labels, test_y)
 
+        #
+        print("Centroid")
+        classifier_object = Centroid.Centroid()
+        classifier_object.train_data_and_find_mean(train_data_with_labels)
+        classified_data = classifier_object.classify(test_data_with_labels.values)
+        cm_accuracy = classifier_object.score(classified_data)
+        print('Centroid Method Accuracy:', cm_accuracy)
+
     except Exception as e:
-        print(e)
+        print(e.with_traceback())

@@ -9,8 +9,8 @@ if __name__ == '__main__':
     train_labels, train_data = ReadData.load_data(train_data_file_name, "SVM")
     test_labels, test_data = ReadData.load_data(test_data_file_name, "SVM")
 
-    SVM = SVC()
+    SVM = SVC(gamma='auto')
     SVM.fit(train_data, train_labels)
     SVM.predict(test_data)
     score = SVM.score(test_data, test_labels)
-    print(score)
+    print("Score: " + str(score))

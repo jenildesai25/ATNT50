@@ -33,7 +33,7 @@ def load_data(file, algo):
     if algo == "LG":
         return N_instance, labels, data
     elif algo == "SVM":
-        return labels, data
+        return labels.transpose(), data.transpose()
 
 # if __name__ == '__main__':
 #     # if file is in the same directory where path is just put file name.

@@ -45,7 +45,7 @@ class LinearRegression:
         Ytest_padding_argmax = np.argmax(Ytest_padding, axis=0) + 1
         err_test_padding = Ytest - Ytest_padding_argmax
         TestingAccuracy_padding = (1 - np.nonzero(err_test_padding)[0].size / len(err_test_padding)) * 100
-        print(TestingAccuracy_padding)
+        print('Accuracy is:', TestingAccuracy_padding)
 
 
 if __name__ == '__main__':

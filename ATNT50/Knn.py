@@ -10,21 +10,21 @@ class Knn:
     def __init__(self, k):
         self.k = k
 
-    # def load_train_test_data(self, train_data, test_data):
-    #     """
-    #
-    #     :param train_data: train data(raw data) is file we wanted our algorithm to train with so we can use that result with test data.
-    #     :param test_data: test data(raw data) for checking that our prediction is right or not and finding the accuracy.
-    #     :return: well formed train and test data with having rows as one image and index is label of the image.
-    #     """
-    #     try:
-    #         # next line will give you transposed and well formatted train data.
-    #         train_data = ReadData.load_data(train_data)
-    #         # next line will give you transposed and well formatted test data.
-    #         test_data = ReadData.load_test_data(test_data)
-    #         return train_data, test_data
-    #     except Exception as e:
-    #         print(e)
+    def load_train_test_data(self, train_data, test_data):
+        """
+
+        :param train_data: train data(raw data) is file we wanted our algorithm to train with so we can use that result with test data.
+        :param test_data: test data(raw data) for checking that our prediction is right or not and finding the accuracy.
+        :return: well formed train and test data with having rows as one image and index is label of the image.
+        """
+        try:
+            # next line will give you transposed and well formatted train data.
+            train_data = ReadData.load_data(train_data)
+            # next line will give you transposed and well formatted test data.
+            test_data = ReadData.load_test_data(test_data)
+            return train_data, test_data
+        except Exception as e:
+            print(e)
 
     def calculate_distance(self, train_data, test_data):
         """

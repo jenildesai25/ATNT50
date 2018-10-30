@@ -45,7 +45,7 @@ def splitData2TestTrain(filename, number_per_class, test_instances):
                 test_instance_count[label] = current_count
             train_X = pd.DataFrame(train_X)
             test_X = pd.DataFrame(train_Y)
-            return train_X, train_Y, test_X, test_Y
+            return train_X, train_Y, test_X, test_Y, train_data_with_labels, test_data_with_labels
         else:
             # we know that this is dataframe.
             test_X = []  # Test data without labels

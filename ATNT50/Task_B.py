@@ -32,7 +32,7 @@ if __name__ == '__main__':
         centroid_data_frame_train = deepcopy(training_data_frame_in_row_with_labels)
         centroid_data_frame_test = deepcopy(test_data_frame_in_row_with_labels)
         # KNN
-        k = 3
+        k = 2
         knn_object = Knn(k)
         data_with_euclidean_distance = knn_object.calculate_distance(training_data_frame_in_row_with_labels
                                                                      , test_data_frame_in_row_with_labels)
@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
         # SVM
         svm_object = SupportVectorMachine()
-        score = svm_object.find_accuracy(train_data_set_without_labels.T, list(train_y.values), test_data_set_without_labels.T, list(test_y.values))
+        score = svm_object.find_accuracy_task_b(train_data_set_without_labels.T, list(train_y.values), test_data_set_without_labels.T, list(test_y.values))
         svm_accuracies.append(score)
 
         # Centroid
@@ -69,7 +69,7 @@ if __name__ == '__main__':
         # for each_test in centroid_data_frame_test.values:
         #     label = centroid_object.get_calcutated_label(test_instance=each_test)
         #     print('Predicted Test Label:', each_test[0], 'Calculated Label:', label)
-    print('KNN Avg accuracy:', sum(knn_accuracies) / len(knn_accuracies))
+    print('\n\nKNN Avg accuracy:', sum(knn_accuracies) / len(knn_accuracies))
     print('Centroid Avg accuracy:', sum(cm_accuracies) / len(cm_accuracies))
     print('Linear Regression Avg accuracy:', sum(lrm_accuracies) / len(lrm_accuracies))
     print('SVM Avg accuracy:', sum(svm_accuracies) / len(lrm_accuracies))

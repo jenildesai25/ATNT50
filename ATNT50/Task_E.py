@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 
 def pickDataClass(filename, class_ids):
@@ -22,7 +23,7 @@ def splitData2TestTrain(filename, number_per_class, test_instances):
             test_Y = []  # Test data labels only
             train_X = []  # Training data without labels
             train_Y = []  # Training data labels only
-
+            filename = filename.transpose()
             test_instance_count = dict()
             for col_number in load_file.columns:
                 val = load_file[col_number].values
@@ -47,7 +48,7 @@ def splitData2TestTrain(filename, number_per_class, test_instances):
             test_Y = []  # Test data labels only
             train_X = []  # Training data without labels
             train_Y = []  # Training data labels only
-
+            filename = filename.transpose()
             test_instance_count = dict()
             for col_number in filename.columns:
                 val = filename[col_number].values
@@ -64,10 +65,19 @@ def splitData2TestTrain(filename, number_per_class, test_instances):
                 current_count += 1
                 test_instance_count[label] = current_count
             train_X = pd.DataFrame(train_X)
-            test_X = pd.DataFrame(train_Y)
+            test_X = pd.DataFrame(test_X)
             return train_X, train_Y, test_X, test_Y
     except Exception as e:
         print(e)
+
+
+def append_data_frame_to_label(data, label):
+    temp_X = data.values
+    temp_XY = list()
+    temp_XY.append(label)
+    for array in temp_X:
+        temp_XY.append(list(array))
+    return pd.DataFrame(temp_XY)
 
 
 # X: Dataframe of training or test data
@@ -82,19 +92,18 @@ def store(X, Y, filename):
 def letter_2_digit_convert(letters):
     return [ord(character) - 96 for character in letters.lower()]
 
-
-if __name__ == '__main__':
-    file = input('Please insert full file path including drive and directory name for train data: ')
-    index_values = list(input('Please insert label that you need to select for data:'))
-    if file:
-        data = pickDataClass(file, index_values)
-        print(data)
-    else:
-        pass
-    train_data_file_name = input('Please insert full file path including drive and directory name for train data: ')
-    number_per_classes = int(input('Please insert the number of images each instance have: '))
-    test_instance = int(input('Please insert the number of images you need for test data: '))
-    if train_data_file_name:
-        print(splitData2TestTrain(train_data_file_name, number_per_classes, test_instance))
-    else:
-        print(splitData2TestTrain(data, number_per_classes, test_instance))
+# if __name__ == '__main__':
+#     file = input('Please insert full file path including drive and directory name for train data: ')
+#     index_values = list(input('Please insert label that you need to select for data:'))
+#     if file:
+#         data = pickDataClass(file, index_values)
+#         print(data)
+#     else:
+#         pass
+#     train_data_file_name = input('Please insert full file path including drive and directory name for train data: ')
+#     number_per_classes = int(input('Please insert the number of images each instance have: '))
+#     test_instance = int(input('Please insert the number of images you need for test data: '))
+#     if train_data_file_name:
+#         print(splitData2TestTrain(train_data_file_name, number_per_classes, test_instance))
+#     else:
+#         print(splitData2TestTrain(data, number_per_classes, test_instance))

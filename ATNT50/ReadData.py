@@ -15,12 +15,6 @@ def load_test_data(file_name):
     return load_file
 
 
-def load_data_without_header(file_name):
-    load_file = pd.read_csv(file_name, sep=",", header=None)
-    load_file = load_file.transpose()
-    return load_file
-
-
 def data_handler(file_name):
     load_file = pd.read_csv(file_name, sep=",", header=None)
     load_file = load_file.transpose()

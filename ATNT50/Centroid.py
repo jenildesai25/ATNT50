@@ -60,8 +60,8 @@ if __name__ == '__main__':
 
     else:
         test_data_file_name = input('Please insert full file path including drive and directory name for test data: ')
-        test_data_set = ReadData.load_data_without_header(test_data_file_name).values
-        train_data_file = ReadData.load_data_without_header(train_data_file_name)
+        test_data_set = ReadData.load_data(test_data_file_name).values
+        train_data_file = ReadData.load_data(train_data_file_name)
         classifier_object.train_data_and_find_mean(data=train_data_file)
         for each_test in test_data_set:
             label = classifier_object.get_calcutated_label(test_instance=each_test)

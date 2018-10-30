@@ -57,7 +57,7 @@ class Centroid:
         for label_file, label_calculated in classified_data:
             if label_file == label_calculated:
                 label_match += 1
-        return (float(label_match) / float(len(classified_data))) * 100
+        return (float(label_match) / float(len(classified_data))) * 100.0
 
 
 if __name__ == '__main__':

@@ -11,7 +11,7 @@ class Centroid:
 
     def train_data_and_find_mean(self, data):
         try:
-            data_frame = ReadData.load_data_without_header(data)
+            data_frame = data
             data_frame_values = data_frame.values
             mean_of_train_data = {}
             for train_data_instance in data_frame_values:
@@ -49,9 +49,20 @@ class Centroid:
 if __name__ == '__main__':
     classifier_object = Centroid()
     train_data_file_name = input('Please insert full file path including drive and directory name for train data: ')
-    test_data_file_name = input('Please insert full file path including drive and directory name for test data: ')
-    test_data_set = ReadData.load_data_without_header(test_data_file_name).values
-    classifier_object.train_data_and_find_mean(data=train_data_file_name)
-    for each_test in test_data_set:
-        label = classifier_object.get_calcutated_label(test_instance=each_test)
-        print('Predicted Test Label:', each_test[0], 'Calculated Label:', label)
+    if 'HandWrittenLetters' in train_data_file_name:
+        train_data_set, test_data_set = ReadData.data_handler(train_data_file_name)
+        # test_data_set = ReadData.load_data_without_header(test_data_file_name).values
+        classifier_object.train_data_and_find_mean(data=train_data_set)
+        # classifier_object.train_data_and_find_mean(data=train_data_file_name)
+        for each_test in test_data_set.values:
+            label = classifier_object.get_calcutated_label(test_instance=each_test)
+            print('Predicted Test Label:', each_test[0], 'Calculated Label:', label)
+
+    else:
+        test_data_file_name = input('Please insert full file path including drive and directory name for test data: ')
+        test_data_set = ReadData.load_data_without_header(test_data_file_name).values
+        train_data_file = ReadData.load_data_without_header(train_data_file_name)
+        classifier_object.train_data_and_find_mean(data=train_data_file)
+        for each_test in test_data_set:
+            label = classifier_object.get_calcutated_label(test_instance=each_test)
+            print('Predicted Test Label:', each_test[0], 'Calculated Label:', label)

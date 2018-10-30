@@ -1,7 +1,6 @@
 from scipy.spatial import distance
 import pandas as pd
-
-from ATNT50 import ReadData
+import ReadData
 
 
 class Centroid:
@@ -45,6 +44,20 @@ class Centroid:
 
         return sorted_distances[0][0]
 
+    def classify(self, test_data_set):
+        prediction = []
+        for test_data in test_data_set:
+            label = self.get_calcutated_label(test_data)
+            prediction.append((test_data[0], label))  # (Label given in file, Label calculated from algorithm)
+        return prediction
+
+    def score(self, classified_data):
+        label_match = 0
+        for label_file, label_calculated in classified_data:
+            if label_file == label_calculated:
+                label_match += 1
+        return (float(label_match) / float(len(classified_data))) * 100
+
 
 if __name__ == '__main__':
     classifier_object = Centroid()
@@ -54,9 +67,13 @@ if __name__ == '__main__':
         # test_data_set = ReadData.load_data_without_header(test_data_file_name).values
         classifier_object.train_data_and_find_mean(data=train_data_set)
         # classifier_object.train_data_and_find_mean(data=train_data_file_name)
-        for each_test in test_data_set.values:
-            label = classifier_object.get_calcutated_label(test_instance=each_test)
-            print('Predicted Test Label:', each_test[0], 'Calculated Label:', label)
+
+        classified_data = classifier_object.classify(test_data_set)
+        # for each_test in test_data_set.values:
+        #     label = classifier_object.get_calcutated_label(test_instance=each_test)
+        #     print('Predicted Test Label:', each_test[0], 'Calculated Label:', label)
+        prediction = classifier_object.score(classified_data)
+        print("Prediction: " + str(prediction))
 
     else:
         test_data_file_name = input('Please insert full file path including drive and directory name for test data: ')

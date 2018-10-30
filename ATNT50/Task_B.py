@@ -14,7 +14,7 @@ if __name__ == '__main__':
     labels = main_data[0:, 0]
     data_with_out_label = main_data[0:, 1:]
 
-    kfold_val = 3
+    kfold_val = 5
     kf = KFold(n_splits=kfold_val, random_state=None, shuffle=True)
 
     kf.get_n_splits(data_with_out_label)
@@ -37,11 +37,6 @@ if __name__ == '__main__':
         data_with_euclidean_distance = knn_object.calculate_distance(training_data_frame_in_row_with_labels.values, test_data_frame_in_row_with_labels.values)
         accuracy = knn_object.get_accuracy([(k['Test Label'], k['Classification']) for k in data_with_euclidean_distance])
         print('Accuracy of Knn is:', accuracy)
-        # data_with_euclidean_distance = knn_object.calculate_distance(training_data_frame_in_row_with_labels
-        #                                                              , test_data_frame_in_row_with_labels)
-        # nearest_neighbour = knn_object.sort_data_frame(data_with_euclidean_distance)
-        # occurrence_label = knn_object.count_matching_label(nearest_neighbour)
-        # accuracy = knn_object.find_accuracy(nearest_neighbour, occurrence_label)
         knn_accuracies.append(accuracy)
 
         # Linear Regression
@@ -69,9 +64,7 @@ if __name__ == '__main__':
         cm_accuracy = centroid_object.score(classified_data)
         print('Centroid Method Accuracy:', cm_accuracy)
         cm_accuracies.append(cm_accuracy)
-        # for each_test in centroid_data_frame_test.values:
-        #     label = centroid_object.get_calcutated_label(test_instance=each_test)
-        #     print('Predicted Test Label:', each_test[0], 'Calculated Label:', label)
+
     print('\n\nKNN Avg accuracy:', sum(knn_accuracies) / len(knn_accuracies))
     print('Centroid Avg accuracy:', sum(cm_accuracies) / len(cm_accuracies))
     print('Linear Regression Avg accuracy:', sum(lrm_accuracies) / len(lrm_accuracies))

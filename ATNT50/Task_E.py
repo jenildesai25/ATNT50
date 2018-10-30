@@ -82,7 +82,7 @@ def splitData2TestTrain(filename, number_per_class, test_instances):
         print(e)
 
 
-def append_data_frame_to_label(data, label):
+def data_to_frame(data, label):
     temp_X = data.values
     temp_XY = list()
     temp_XY.append(label)

@@ -40,7 +40,8 @@ if __name__ == '__main__':
         linear_regression_object.accuracy(N_train, N_test, Xtrain, Xtest, Ytrain, Ytest)
 
         # SVM
-        svm_object = Svm.SupportVectorMachine(train_data_set_without_labels, train_y, test_data_set_without_labels, test_y)
+        svm_object = Svm.SupportVectorMachine()
+        svm_object.find_accuracy(train_data_set_without_labels, train_y, test_data_set_without_labels, test_y)
 
     except Exception as e:
         print(e)

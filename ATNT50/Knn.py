@@ -128,7 +128,8 @@ class Knn:
                     count += 1
                 else:
                     count += 1
-            print('Accuracy of test data is: {}%'.format(accuracy_percentage))
+            print('Accuracy of Knn is: {}%'.format(accuracy_percentage))
+            return accuracy_percentage
         except Exception as e:
             print(e)
 

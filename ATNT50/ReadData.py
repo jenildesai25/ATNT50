@@ -19,6 +19,20 @@ def load_data_without_header(file_name):
     load_file = pd.read_csv(file_name, sep=",", header=None)
     load_file = load_file.transpose()
     return load_file
+
+
+def load_data(file, algo):
+    load_file = pd.read_csv(file, sep=',', header=None)
+    labels = load_file.iloc[0]
+    # print(labels)
+    N_instance = labels.size
+    # print(N_instance)
+    data = load_file.iloc[1:]
+    if algo == "LG":
+        return N_instance, labels, data
+    elif algo == "SVM":
+        return labels, data
+
 # if __name__ == '__main__':
 #     # if file is in the same directory where path is just put file name.
 #     # if reading file using terminal uncomment next line and pass file_path

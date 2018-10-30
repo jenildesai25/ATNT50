@@ -7,20 +7,10 @@
 
 import numpy as np
 import pandas as pd
+import ReadData
 
 
 class LinearRegression:
-    @classmethod
-    def load_data(cls, file):
-        load_file = pd.read_csv(file, sep=',', header=None)
-        # iloc uses to slicing dataframe. load_file.iloc[0] will give 1st column.
-        labels = load_file.iloc[0]
-        # N_instance is the label size
-        label_size = labels.size
-        # data does not contain any labels.
-        data = load_file.iloc[1:]
-        return label_size, labels, data
-
     @classmethod
     def indicator_matrix(cls, L_train):
         Ytrain = pd.DataFrame()
@@ -62,13 +52,13 @@ if __name__ == '__main__':
     train_data_file_name = input('Please insert full file path including drive and directory name for train data: ')
     test_data_file_name = input('Please insert full file path including drive and directory name for test data: ')
     lg = LinearRegression()
-    N_train, L_train, Xtrain = lg.load_data(train_data_file_name)
+    N_train, L_train, Xtrain = ReadData.load_data(train_data_file_name, "LG")
     # print("Ntrain: " + str(N_train))
     # print("Ltrain: ")
     # print(L_train)
     # print("Xtrain: ")
     # print(Xtrain)
-    N_test, Ytest, Xtest = lg.load_data(test_data_file_name)
+    N_test, Ytest, Xtest = ReadData.load_data(test_data_file_name, "LG")
     # print("Ntest: " + str(N_test))
     # print("Ytest: ")
     # print(Ytest)

@@ -1,4 +1,4 @@
-from ATNT50 import ReadData
+import ReadData
 from scipy.spatial import distance
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import KFold

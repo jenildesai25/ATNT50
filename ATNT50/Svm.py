@@ -10,7 +10,7 @@ class SupportVectorMachine:
         SVM.predict(test_data)
         score = SVM.score(test_data, test_labels)
         print("Score of SVM is : " + str(score * 100))
-        return score
+        return score * 100
 
 # if __name__ == '__main__':
 #     print("Please insert full file path including drive and directory name for: ")

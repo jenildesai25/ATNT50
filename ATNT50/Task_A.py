@@ -3,6 +3,7 @@ import Task_E
 import LinearRegression
 import Svm
 import Centroid
+from copy import deepcopy
 
 if __name__ == '__main__':
 
@@ -16,7 +17,8 @@ if __name__ == '__main__':
         letter_to_digit = Task_E.letter_2_digit_convert(classes_label)
         data_frame = Task_E.pickDataClass(train_data_file_name, letter_to_digit)
         train_data_set_without_labels, train_y, test_data_set_without_labels, test_y, train_data_with_labels, test_data_with_labels = Task_E.splitData2TestTrain(data_frame, 39, 9)
-
+        centroid_data_frame_train = deepcopy(train_data_with_labels)
+        centroid_data_frame_test = deepcopy(test_data_with_labels)
         knn_object = Knn(k)
         data_with_euclidean_distance = knn_object.calculate_distance(train_data_with_labels, test_data_with_labels)
         nearest_neighbour = knn_object.sort_data_frame(data_with_euclidean_distance)
@@ -47,8 +49,8 @@ if __name__ == '__main__':
         #
         print("Centroid")
         classifier_object = Centroid.Centroid()
-        classifier_object.train_data_and_find_mean(train_data_with_labels)
-        classified_data = classifier_object.classify(test_data_with_labels.values)
+        classifier_object.train_data_and_find_mean(centroid_data_frame_train)
+        classified_data = classifier_object.classify(centroid_data_frame_test.values)
         cm_accuracy = classifier_object.score(classified_data)
         print('Centroid Method Accuracy:', cm_accuracy)
 

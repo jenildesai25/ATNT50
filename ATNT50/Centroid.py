@@ -9,6 +9,12 @@ class Centroid:
         self.centroids = []
 
     def train_data_and_find_mean(self, data):
+        """
+
+        :param data: takes train data in row format. that means every row is an image and 1st element of row is label and after that it
+        will be data. For Example: data frame should be in [1,2,3,4,5,6,7,8,9] here 1 is the label and after that [2,3,4,5,6,7,8,9] is the data.
+        :return: append values to self.centroid.
+        """
         try:
             data_frame = data
             data_frame_values = data_frame.values
@@ -46,6 +52,13 @@ class Centroid:
         return sorted_distances[0][0]
 
     def classify(self, test_data_set):
+        """
+
+        :param test_data_set: takes test data as input. data is row formatted. 1st row contains 1st image and 1st element is class label
+        and after that it contains data.For Example: data frame should be in [1,2,3,4,5,6,7,8,9] here 1 is the label and after
+        that [2,3,4,5,6,7,8,9] is the data.
+        :return:
+        """
         prediction = []
         for test_data in test_data_set:
             label = self.get_calcutated_label(test_data)
@@ -53,6 +66,11 @@ class Centroid:
         return prediction
 
     def score(self, classified_data):
+        """
+
+        :param classified_data: take prediction count score
+        :return: final score
+        """
         label_match = 0
         for label_file, label_calculated in classified_data:
             if label_file == label_calculated:

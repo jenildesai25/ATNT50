@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+
 # Returns data row wise - 1st column has labels
 def pickDataClass(filename, class_ids):
     load_file = pd.read_csv(filename, sep=",", header=None)
@@ -12,6 +13,7 @@ def pickDataClass(filename, class_ids):
                 result.append(j)
     result = pd.DataFrame(result)
     return result
+
 
 # filename: expects string name of file including full path OR
 # passes dataframe in vertical format which is same as file format, i.e. 1st row has labels

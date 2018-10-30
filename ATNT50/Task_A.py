@@ -9,12 +9,12 @@ if __name__ == '__main__':
 
     try:
         # KNN
-        # k = int(input('Please enter the values of k: '))
-
-        # train_data_file_name = input('Please insert full file path including drive and directory name for train data: ')
         train_data_file_name = "../HandWrittenLetters.txt"
-        classes_label = 'ABCDE'
+        classes_label = 'JLDI'
+        numbers = '1245'
         letter_to_digit = Task_E.letter_2_digit_convert(classes_label)
+        for i in numbers:
+            letter_to_digit.append(i)
         data_frame = Task_E.pickDataClass(train_data_file_name, letter_to_digit)
         train_data_set_without_labels, train_y, test_data_set_without_labels, test_y, train_data_with_labels, test_data_with_labels = Task_E.splitData2TestTrain(data_frame, 39, 9)
         centroid_data_frame_train = deepcopy(train_data_with_labels)

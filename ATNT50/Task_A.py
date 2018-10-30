@@ -8,7 +8,9 @@ if __name__ == '__main__':
     try:
         # KNN
         k = int(input('Please enter the values of k: '))
-        train_data_file_name = input('Please insert full file path including drive and directory name for train data: ')
+
+        # train_data_file_name = input('Please insert full file path including drive and directory name for train data: ')
+        train_data_file_name = "../HandWrittenLetters.txt"
         classes_label = 'ABCDE'
         letter_to_digit = Task_E.letter_2_digit_convert(classes_label)
         data_frame = Task_E.pickDataClass(train_data_file_name, letter_to_digit)

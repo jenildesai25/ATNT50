@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-
+# Returns data row wise - 1st column has labels
 def pickDataClass(filename, class_ids):
     load_file = pd.read_csv(filename, sep=",", header=None)
     load_file = load_file.transpose()
@@ -13,19 +13,20 @@ def pickDataClass(filename, class_ids):
     result = pd.DataFrame(result)
     return result
 
-
+# filename: expects string name of file including full path OR
+# passes dataframe in vertical format which is same as file format, i.e. 1st row has labels
 def splitData2TestTrain(filename, number_per_class, test_instances):
     try:
         if '.txt' in str(filename):
-            load_file = pd.read_csv(filename, sep=",", header=None)
-            load_file = load_file.transpose()
+            filename = pd.read_csv(filename, sep=",", header=None)
+            # load_file = load_file.transpose()
             test_X = []  # Test data without labels
             test_Y = []  # Test data labels only
             train_X = []  # Training data without labels
             train_Y = []  # Training data labels only
             train_data_with_labels = []
             test_data_with_labels = []
-            filename = filename.transpose()
+            # filename = filename.transpose()
             test_instance_count = dict()
             for col_number in filename.columns:
                 val = filename[col_number].values

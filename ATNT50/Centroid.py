@@ -25,8 +25,8 @@ class Centroid:
                     aggregated_data_record['n'] += 1
                 mean_of_train_data[label] = aggregated_data_record
 
-                for label, values in mean_of_train_data.items():
-                    self.centroids.append([x / values['n'] for x in values['list_sums']])
+            for label, values in mean_of_train_data.items():
+                self.centroids.append([x / values['n'] for x in values['list_sums']])
             # print(self.centroids)
         except Exception as e:
             print(e)

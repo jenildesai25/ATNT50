@@ -70,6 +70,19 @@ def splitData2TestTrain(filename, number_per_class, test_instances):
         print(e)
 
 
+# X: Dataframe of training or test data
+# Y: Dataframe/row of header/labels of training or test data
+# filename: Name of file to save without extension
+def store(X, Y, filename):
+    X.insert(0, Y)
+    X.to_csv(filename + ".txt", sep=',')
+
+
+# letter: String of alphabets
+def letter_2_digit_convert(letters):
+    return [ord(character) - 96 for character in letters.lower()]
+
+
 if __name__ == '__main__':
     file = input('Please insert full file path including drive and directory name for train data: ')
     index_values = list(input('Please insert label that you need to select for data:'))

@@ -67,7 +67,7 @@ def data_to_frame(data, label):
 
 # X: Dataframe of training or test data
 # Y: Dataframe/row of header/labels of training or test data
-# filename: Name of file to save without extension
+# filename: Name of file to save with extension
 def store(X, Y, filename):
     df = data_to_frame(X, Y)
     df.to_csv(filename, header=False, index=False, index_label=False)

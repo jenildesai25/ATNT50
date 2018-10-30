@@ -10,11 +10,11 @@ if __name__ == '__main__':
     try:
         # KNN
         train_data_file_name = "../HandWrittenLetters.txt"
-        classes_label = 'JLDI'
-        numbers = '1245'
+        classes_label = 'ABCDE'
+        # numbers = '1245'
         letter_to_digit = Task_E.letter_2_digit_convert(classes_label)
-        for i in numbers:
-            letter_to_digit.append(i)
+        # for i in numbers:
+        #     letter_to_digit.append(i)
         data_frame = Task_E.pickDataClass(train_data_file_name, letter_to_digit)
         train_data_set_without_labels, train_y, test_data_set_without_labels, test_y, train_data_with_labels, test_data_with_labels = Task_E.splitData2TestTrain(data_frame, 39, 9)
         centroid_data_frame_train = deepcopy(train_data_with_labels)
@@ -38,7 +38,6 @@ if __name__ == '__main__':
         svm_object.find_accuracy(train_data_set_without_labels, train_y, test_data_set_without_labels, test_y)
 
         #
-        print("Centroid")
         classifier_object = Centroid.Centroid()
         classifier_object.train_data_and_find_mean(centroid_data_frame_train)
         classified_data = classifier_object.classify(centroid_data_frame_test.values)

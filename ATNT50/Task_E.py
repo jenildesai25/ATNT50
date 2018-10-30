@@ -84,8 +84,7 @@ def append_data_frame_to_label(data, label):
 # Y: Dataframe/row of header/labels of training or test data
 # filename: Name of file to save without extension
 def store(X, Y, filename):
-    X.insert(0, Y)
-    X.to_csv(filename + ".txt", sep=',')
+    append_data_frame_to_label(X, Y).to_csv(filename + ".txt", sep=',')
 
 
 # letter: String of alphabets

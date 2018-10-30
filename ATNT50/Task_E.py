@@ -95,7 +95,7 @@ def data_to_frame(data, label):
 # Y: Dataframe/row of header/labels of training or test data
 # filename: Name of file to save without extension
 def store(X, Y, filename):
-    append_data_frame_to_label(X, Y).to_csv(filename + ".txt", sep=',')
+    data_to_frame(X, Y).to_csv(filename + ".txt", sep=',')
 
 
 # letter: String of alphabets

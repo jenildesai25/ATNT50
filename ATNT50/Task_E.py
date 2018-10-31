@@ -35,14 +35,14 @@ def splitData2TestTrain(filename, number_per_class, test_instances, train_first=
             val = filename[col_number].values
             label = val[0]
             current_count = test_instance_count.get(label, 0)
-            if ((not train_first and current_count < test_instances) or (train_first and current_count >= test_instances)):
+            if ((not train_first and current_count < test_instances) or (train_first and current_count >= number_per_class - test_instances)):
                 # Add to test
-                test_Y.append(label)
+                test_Y.append(chr(label+96))
                 test_X.append(val[1:])
                 test_data_with_labels.append(val)
             else:
                 # Add to training
-                train_Y.append(label)
+                train_Y.append(chr(label+96))
                 train_X.append(val[1:])
                 train_data_with_labels.append(val)
             current_count += 1

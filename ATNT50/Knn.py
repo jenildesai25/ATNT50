@@ -7,8 +7,9 @@ import Task_E
 
 class Knn:
 
-    def __init__(self, k):
+    def __init__(self, k, distance_method):
         self.k = k
+        self.distance_method = distance_method
 
     def load_train_test_data(self, train_data, test_data):
         """
@@ -56,7 +57,10 @@ class Knn:
         try:
             distances = []
             for training_data in training_data:
-                euclidean_dist = distance.euclidean(training_data[1:], testing_data[1:])
+                if self.distance_method == "eu":
+                    euclidean_dist = distance.euclidean(training_data[1:], testing_data[1:])
+                elif self.distance_method == "cos":
+                    euclidean_dist = distance.cosine(training_data[1:], testing_data[1:])
                 distances.append((euclidean_dist, training_data[0]))
 
             # Sort by distances

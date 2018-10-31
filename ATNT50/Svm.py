@@ -5,12 +5,12 @@ import ReadData
 class SupportVectorMachine:
 
     def find_accuracy(self, train_data, train_labels, test_data, test_labels):
-        SVM = SVC(gamma='auto')
+        SVM = SVC(gamma='auto', kernel='linear')
         SVM.fit(train_data, train_labels)
-        SVM.predict(test_data)
+        prediction = SVM.predict(test_data)
         score = SVM.score(test_data, test_labels)
         print("Score of SVM is : " + str(score * 100))
-        return score * 100
+        return score * 100, prediction
 
     def find_accuracy_task_b(self, train_data, train_labels, test_data, test_labels):
         SVM = SVC(gamma='auto')
